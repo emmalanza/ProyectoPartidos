@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Logica {
 
@@ -72,11 +73,12 @@ public class Logica {
         }
     }
 
-    /*public void leer_fichero (File fichero){
+/*    public void leer_fichero (File fichero){
             try {
                 ois = new ObjectInputStream(new FileInputStream(fichero));
+                ArrayList<Partido> p = (ArrayList<Partido>)ois.readObject();
                 while (true)
-                    Partido p = ois.readObject();
+
                     listaPartidos.add(p);
             } catch (EOFException e){
                 e.printStackTrace();
@@ -95,6 +97,6 @@ public class Logica {
                     e.printStackTrace();
                 }
             }
-    }*/
-
+    }
+*/
 }
