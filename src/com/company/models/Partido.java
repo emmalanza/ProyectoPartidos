@@ -53,23 +53,18 @@ public class Partido implements Comparable<Partido>, Serializable {
     }
 
     public String getSfecha() {
-
         String Sfecha = sdf.format(fecha);
         return Sfecha;
-
     }
 
     public String getMarcador() {
-
         marcador = resul1 + "-" + resul2;
         return marcador;
     }
 
 
     public int compareTo(Partido o) {
-
         return fecha.compareTo(o.fecha);
-
     }
 
 }

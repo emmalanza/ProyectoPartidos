@@ -12,19 +12,14 @@ public class Main {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     public static void main(String[] args) {
-
         System.out.println("APLICACIÓN PARA LA GESTIÓN DE PARTIDOS DE RUGBY.");
-
         Main interfaz = new Main();
-
     }
-
 
     public Main() {
 
         Partido partido;
         ArrayList<Partido> partidos = new ArrayList<Partido>();
-
 
         File fichero = new File("C:\\Users\\Emma\\Desktop\\partidos.obj");
 
@@ -44,11 +39,8 @@ public class Main {
             e.printStackTrace();
         }
 
-
         int opc;
-
         do {
-
             System.out.println("Elige una opción: "
                     + "\n1.Dar de alta un partido "
                     + "\n2.Mostrar partidos "
@@ -56,7 +48,6 @@ public class Main {
                     + "\n4.Mostrar partidos ordenados por fecha "
                     + "\n5.Mostrar partidos de una división"
                     + "\n6.Salir");
-
 
             opc = entradaT.nextInt();
             entradaT.nextLine();
@@ -83,14 +74,11 @@ public class Main {
                 case 5:
                     mostrar_division(partidos);
                     break;
-
-
             }
 
         } while (opc != 6);
 
         System.out.println("GRACIAS");
-
 
         try {
             FileOutputStream fos = new FileOutputStream(fichero);
@@ -105,13 +93,13 @@ public class Main {
 
     }
 
+    //CREACION DE METODOS
 
     public Partido alta_partido() {
 
         String local, visitante, div, fecha;
         int puntos1, puntos2;
         Date date = null;
-
 
         System.out.println("Dar de alta un partido.");
 
@@ -122,14 +110,11 @@ public class Main {
         System.out.println("Introduzca el nombre del equipo visitante: ");
         visitante = entradaT.nextLine();
 
-
         do {
             System.out.println("Indique división: (PRIMERA/SEGUNDA/TERCERA)");
             div = entradaT.nextLine();
-
         } while (!div.equalsIgnoreCase("primera") && !div.equalsIgnoreCase("segunda")
                 && !div.equalsIgnoreCase("tercera"));
-
 
         System.out.println("Indique resultado. ");
         System.out.println("Puntos del equipo local: ");
@@ -139,7 +124,6 @@ public class Main {
         entradaT.nextLine();
         System.out.println("Introduzca la fecha del partido. (Ejemplo: 6/06/2016) ");
         fecha = entradaT.nextLine();
-
 
         try {
             date = sdf.parse(fecha);
@@ -158,9 +142,7 @@ public class Main {
         int size = partidos.size();
 
         if (size == 0) {
-
             System.out.println("No hay partidos que mostrar.");
-
         } else {
 
             System.out.println("Lista de partidos.");
@@ -247,7 +229,6 @@ public class Main {
         } while (!div.equalsIgnoreCase("primera") && !div.equalsIgnoreCase("segunda")
                 && !div.equalsIgnoreCase("tercera"));
 
-
         for (int i = 0; i < partidos.size(); i++) {
 
             div2 = partidos.get(i).getDivision();
@@ -266,12 +247,9 @@ public class Main {
             }
 
         }
-
         if (x == 0)
             System.out.println("No hay partidos correspondientes a esa división.");
-
     }
-
 }
 
 

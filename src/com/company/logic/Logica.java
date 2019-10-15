@@ -31,7 +31,7 @@ public class Logica {
     ObjectInputStream ois;
     ObjectOutputStream oos;
 
-    //metodo que añada partidos a una lista
+    //metodo que añade partidos a una lista
     public void addPartido(Partido partido) {
         listaPartidos.add(partido);
     }

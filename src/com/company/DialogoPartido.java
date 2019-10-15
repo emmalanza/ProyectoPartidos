@@ -30,7 +30,7 @@ public class DialogoPartido extends Stage {
     private DatePicker fecha_dp;
     private Button bttn_aceptar;
 
-    //
+    //constructor para dar de alta un partido
     public DialogoPartido() {
         inicializaVista();
         bttn_aceptar.setOnAction(new EventHandler<ActionEvent>() {
@@ -41,6 +41,7 @@ public class DialogoPartido extends Stage {
         });
     }
 
+    //constructor para moodificar un partido
     public DialogoPartido(int indice, Partido partido){
 
         inicializaVista();
@@ -69,19 +70,13 @@ public class DialogoPartido extends Stage {
             Partido partidoM = new Partido(local,visitante,div,resul1,resul2,fecha);
             Logica.getInstance().modificarPartido(partidoM,indice);
 
-
             close();
-
         }
     });
-
-
 }
 
+    //metodo comun
     public void inicializaVista(){
-
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         Label e_local = new Label("Nombre del equipo local:");
         txt_local = new TextField();
@@ -105,10 +100,11 @@ public class DialogoPartido extends Stage {
         Label lbl_fecha = new Label("Fecha:");
         fecha_dp = new DatePicker();
 
-
+        //boton aceptar que tendra diferentes funcionalidades dependiendo
+        //del constructor
         bttn_aceptar = new Button("ACEPTAR");
-        Button bttn_cancelar = new Button("CANCELAR");
 
+        Button bttn_cancelar = new Button("CANCELAR");
         bttn_cancelar.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 close();
@@ -152,6 +148,7 @@ public class DialogoPartido extends Stage {
 
     }
 
+    //metodo que añade partidos a una lista
     public void addPartido(TextField txt_local, TextField txt_visitante, TextField txt_r1, TextField txt_r2,
                            DatePicker fecha_dp, ComboBox division_cb){
 
@@ -169,6 +166,7 @@ public class DialogoPartido extends Stage {
 
         Partido p = new Partido(local, visitante, div, resul1, resul2, fecha);
 
+        //a su vez llama al metodo de la clase Logica
         Logica.getInstance().addPartido(p);
 
     }

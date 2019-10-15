@@ -19,16 +19,21 @@ public class Tabla extends Stage {
 
     public Tabla() {
 
+        //instancia de la clase logica
         Logica logica = Logica.getInstance();
+
         TableView tabla;
         File fichero;
 
+        //pasamos la ruta del archivo
         fichero = new File("/Users/mipc/Desktop/fichero.dat");
 
+        //leemos el fichero si existe
         if (fichero.exists()) {
             logica.leer_fichero(fichero);
         }
 
+        //ComboBox que dara la opcion de seleccionar partidos
         ComboBox cb_filtrar;
         ObservableList<String> listaDivision = FXCollections.observableArrayList();
         listaDivision.add("Todas");
@@ -38,7 +43,7 @@ public class Tabla extends Stage {
         cb_filtrar = new ComboBox<String>(listaDivision);
         cb_filtrar.getSelectionModel().selectFirst();
 
-
+        //creamos la tabla donde se veran todos los partidos
         tabla = new TableView(logica.getLista());
         TableColumn<String, Partido> column1 = new TableColumn<>("Equipo local");
         column1.setCellValueFactory(new PropertyValueFactory<>("local"));
@@ -66,6 +71,7 @@ public class Tabla extends Stage {
         column5.setMinWidth(100);
         column5.setMaxWidth(100);
 
+        //boton para añadir un partido
         Button bttn_alta = new Button("ALTA PARTIDO");
         bttn_alta.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -74,9 +80,12 @@ public class Tabla extends Stage {
             }
         });
 
+        //boton para modificar un partido
         Button bttn_modif = new Button("MODIFICAR PARTIDO");
         bttn_modif.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
+
+                //solo se pueden modificar partidos si no estan filtrados
 
                 String filtro = (String) cb_filtrar.getSelectionModel().getSelectedItem();
 
@@ -96,9 +105,12 @@ public class Tabla extends Stage {
             }
         });
 
+        //boton para borrar un partido
         Button bttn_baja = new Button("BAJA PARTIDO");
         bttn_baja.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
+
+                //solo se puede modificar un partido si no esta filtrado
 
                 String filtro = (String) cb_filtrar.getSelectionModel().getSelectedItem();
 
@@ -117,6 +129,7 @@ public class Tabla extends Stage {
             }
         });
 
+        //cada vez que seleccionamos una opcion del ComboBox filtramos la tabla
        cb_filtrar.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
@@ -126,6 +139,7 @@ public class Tabla extends Stage {
             }
         });
 
+       //boton que cierra la aplicacion y escribe en el fichero la lista de partidos
         Button bttn_salir = new Button("SALIR");
         bttn_salir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -134,7 +148,8 @@ public class Tabla extends Stage {
             }
         });
 
-
+        //metemos nuestros elementos en el contenedor AnchorPane
+        //los ancla a los bordes
         AnchorPane anchorPane = new AnchorPane();
 
         AnchorPane.setBottomAnchor(tabla,50d);
@@ -166,8 +181,6 @@ public class Tabla extends Stage {
 
         Scene scene = new Scene(anchorPane, 800,500);
         setScene(scene);
-
-
 
     }
 }
