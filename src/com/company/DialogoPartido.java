@@ -15,6 +15,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class DialogoPartido extends Stage {
@@ -28,21 +30,15 @@ public class DialogoPartido extends Stage {
     private DatePicker fecha_dp;
     private Button bttn_aceptar;
 
-
-
+    //
     public DialogoPartido() {
-
         inicializaVista();
         bttn_aceptar.setOnAction(new EventHandler<ActionEvent>() {
-
             public void handle(ActionEvent event) {
-
                 addPartido(txt_local,txt_visitante,txt_r1,txt_r2,fecha_dp,division_cb);
                 close();
-
             }
         });
-
     }
 
     public DialogoPartido(int indice, Partido partido){
@@ -53,7 +49,8 @@ public class DialogoPartido extends Stage {
         txt_r1.setText(String.valueOf(partido.getResul1()));
         txt_r2.setText(String.valueOf(partido.getResul2()));
         division_cb.getSelectionModel().select(partido.getDivision());
-
+        LocalDate localD = Utils.convertiDate2LocalDate(partido.getFecha());
+        fecha_dp.setValue(localD);
 
         bttn_aceptar.setOnAction(new EventHandler<ActionEvent>() {
         public void handle(ActionEvent event) {

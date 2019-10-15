@@ -25,7 +25,9 @@ public class Tabla extends Stage {
 
         fichero = new File("/Users/mipc/Desktop/fichero.dat");
 
-        //logica.leer_fichero(fichero);
+        if (fichero.exists()) {
+            logica.leer_fichero(fichero);
+        }
 
         ComboBox cb_filtrar;
         ObservableList<String> listaDivision = FXCollections.observableArrayList();
@@ -75,29 +77,52 @@ public class Tabla extends Stage {
         Button bttn_modif = new Button("MODIFICAR PARTIDO");
         bttn_modif.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                int indiceM = tabla.getSelectionModel().getSelectedIndex();
-                Partido partido_seleccionado = (Partido) Logica.getInstance().getLista().get(indiceM);
-                Stage dialogo_partido = new DialogoPartido(indiceM,partido_seleccionado);
-                dialogo_partido.show();
+
+                String filtro = (String) cb_filtrar.getSelectionModel().getSelectedItem();
+
+                if (!filtro.equalsIgnoreCase("Todas")){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText("Error fatal.");
+                    alert.setContentText("No se pueden modificar partidos mientras estén filtrados.");
+                    alert.show();
+                }
+                else {
+                    int indiceM = tabla.getSelectionModel().getSelectedIndex();
+                    Partido partido_seleccionado = (Partido) Logica.getInstance().getLista().get(indiceM);
+                    Stage dialogo_partido = new DialogoPartido(indiceM, partido_seleccionado);
+                    dialogo_partido.show();
+                }
             }
         });
 
         Button bttn_baja = new Button("BAJA PARTIDO");
         bttn_baja.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                int indiceBorrar = tabla.getSelectionModel().getSelectedIndex();
-                if(indiceBorrar>=0)
-                    logica.borrarPartido(indiceBorrar);
-                    //todo mostrar mensaje al usuario
+
+                String filtro = (String) cb_filtrar.getSelectionModel().getSelectedItem();
+
+                if (!filtro.equalsIgnoreCase("Todas")){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText("Error fatal.");
+                    alert.setContentText("No se pueden borrar partidos mientras estén filtrados.");
+                    alert.show();
+                }
+                else {
+                    int indiceBorrar = tabla.getSelectionModel().getSelectedIndex();
+                    if (indiceBorrar >= 0)
+                        logica.borrarPartido(indiceBorrar);
+                }
             }
         });
 
        cb_filtrar.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
             public void handle(ActionEvent event) {
+
                 String filtro = (String) cb_filtrar.getSelectionModel().getSelectedItem();
                 tabla.setItems(logica.filtrar(filtro));
-                //todo solucionar error borrado
+
             }
         });
 
@@ -111,18 +136,24 @@ public class Tabla extends Stage {
 
 
         AnchorPane anchorPane = new AnchorPane();
+
         AnchorPane.setBottomAnchor(tabla,50d);
         AnchorPane.setTopAnchor(tabla, 50d);
         AnchorPane.setLeftAnchor(tabla, 20d);
         AnchorPane.setRightAnchor(tabla, 20d);
+
         AnchorPane.setBottomAnchor(bttn_alta,20d);
         AnchorPane.setLeftAnchor(bttn_alta, 20d);
+
         AnchorPane.setBottomAnchor(bttn_modif,20d);
         AnchorPane.setLeftAnchor(bttn_modif, 200d);
+
         AnchorPane.setBottomAnchor(bttn_baja,20d);
-        AnchorPane.setRightAnchor(bttn_baja, 20d);
+        AnchorPane.setRightAnchor(bttn_baja, 200d);
+
         AnchorPane.setLeftAnchor(cb_filtrar, 20d);
         AnchorPane.setTopAnchor(cb_filtrar, 20d);
+
         AnchorPane.setBottomAnchor(bttn_salir,20d);
         AnchorPane.setRightAnchor(bttn_salir, 20d);
 
