@@ -26,7 +26,7 @@ public class Tabla extends Stage {
         File fichero;
 
         //pasamos la ruta del archivo
-        fichero = new File("/Users/mipc/Desktop/fichero.dat");
+        fichero = new File("fichero_partido.dat");
 
         //leemos el fichero si existe
         if (fichero.exists()) {
